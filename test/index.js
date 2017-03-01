@@ -324,7 +324,7 @@ function time(options) {
 function fix(options) {
   ['tests', 'original', 'new'].forEach(function(dir) {
     try {
-      fs.mkdirSync(path.resolve(__dirname, dir), 0755);
+      fs.mkdirSync(path.resolve(__dirname, dir), 0o755);
     } catch (e) {
       ;
     }
