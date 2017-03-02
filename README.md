@@ -4,12 +4,16 @@ This program is forked from [chjj/marked](https://github.com/chjj/marked).
 
 I modify and add some functions, to cover my blog needs.
 
+## 注意⚠️
+
+`marked.min.js`还是原来的，我没有对自己的代码进行压缩。等之后再弄。
+
 ## 修改的地方
  - 删除了一些兼容非ES5的语法什么的。可能对IE浏览器的支持不好，在乎兼容性的请不要使用这个。
  - 支持 `tags`, 格式: `tags: ` (must has a space)
  - 支持 `date`, 格式: `date: YYYY-MM-DD HH:mm`
  - 支持 `toc`, 格式: `[toc]`
- - 返回数据变化了。作者原来的库只返回了渲染后的HTML字符串，现在返回的是一个对象`tags: [], date: '', html: '', abstract:''`
+ - 返回数据变化了。作者原来的库只返回了渲染后的HTML字符串，现在返回的是一个对象`tags: [], date: '', html: '', abstract:'', title ''`
  - 支持 `<!--more-->`, 格式： 在任意地方添加这个标签，会使渲染结构变成两个部分，完整的markdown文件会赋值给`HTML`，`<!--more-->`之前的部分会赋值给`abstract`
  - ~~妈蛋，简直就是把hexo实现了一遍，好气啊~~
  
@@ -17,6 +21,7 @@ I modify and add some functions, to cover my blog needs.
 
 - [highlight.js](https://github.com/isagalaev/highlight.js) 但是还是需要在外面setOption中添加highlight属性。
 - [semantic-ui](http://semantic-ui.com/), **注意⚠️：**这个并没有在`package.json`中表明依赖，因为这个只需要在网页中引用即可，跟项目没啥关系，没必要每次`npm install`的时候安装全部源码什么的。
+- ~~Disqus. 这个会在标签和日期的后面添加一个评论数量。~~添加这个还要往marked里面传一个无关解析的参数，现在还是算了吧。考虑用jq在页面加载完成后操作dom好了。
 
 ## 修改的方法
 
