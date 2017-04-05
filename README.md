@@ -34,7 +34,7 @@ I modify and add some functions, to cover my blog needs.
 
 **5，** 标题的添加方法又两种，分别是[Setext](http://docutils.sourceforge.net/mirror/setext.html)和[atx](http://www.aaronsw.com/2002/atx/)，简单点来说就是第一个是在标题下面添加-和=来区分，只能区分一级和二级标题，第二个在标题前面添加#，按#的个数来区分，又6个级别，详细的你们自己再去了解一下吧。我直接禁用掉了第一种～～～，你们有需要的话自己再修改，源码里的`heading`是`atx`，`lheading`是`Setext`。
 
-**6，** 2017-04-05 0.3.16版本修改：用ES6的class重写了一遍，也没改动什么源码，只是更改了格式。现在new的时候，直接带上options即可，没有了`setOptions`方法。增加了一个exec方法(我也不知道叫什么名字好，因为`render`和`parser`里面的函数都有这个名字了)。添加了`highlight.js`的依赖，直接写在了源码和`package.json`里面。综上，渲染的时候，用`new marked(options).exec(markdownText)`这个方法就好了。
+**6，** **2017-04-05 0.3.18** 版本修改：用ES6的class重写了一遍，也没改动什么源码，只是更改了格式。现在new的时候，直接带上options即可，没有了`setOptions`方法。增加了一个exec方法(我也不知道叫什么名字好，因为`render`和`parser`里面的函数都有这个名字了)。添加了`highlight.js`的依赖，直接写在了源码和`package.json`里面。综上，渲染的时候，用`new marked(options).exec(markdownText)`这个方法就好了。
 
 ## todo
 
