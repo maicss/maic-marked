@@ -34,7 +34,7 @@ I modify and add some functions, to cover my blog needs.
 
 **5，** **2017-04-05 0.3.18** 版本修改：用ES6的class重写了一遍，也没改动什么源码，只是更改了格式。现在new的时候，直接带上options即可，没有了`setOptions`方法。增加了一个exec方法(我也不知道叫什么名字好，因为`render`和`parser`里面的函数都有这个名字了)。添加了`highlight.js`的依赖，直接写在了源码和`package.json`里面。综上，渲染的时候，用`new marked(options).exec(markdownText)`这个方法就好了。
 
-**6，** **2017-08-31 0.3.20** 版本修改：添加了`abstract`，另外把自己添加的所有东西都独立了出来，不再往原来的HTML结构中添加东西。这样更方便外面控制和渲染
+**6，** **2017-08-31 0.3.20** 版本修改：添加了`abstract`，另外把自己添加的所有东西都独立了出来，不再往原来的HTML结构中添加东西。这样更方便外面控制和渲染。
 
 ## todo
 
