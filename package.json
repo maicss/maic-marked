@@ -2,11 +2,8 @@
   "name": "maic-marked",
   "description": "A markdown parser built for speed",
   "author": "Christopher Jeffrey",
-  "version": "0.3.22",
-  "main": "./lib/marked.js",
-  "bin": "./bin/marked",
-  "man": "./man/marked.1",
-  "preferGlobal": true,
+  "version": "0.3.23",
+  "main": "marked.js",
   "repository": "git://github.com/maicss/maic-marked.git",
   "homepage": "https://github.com/maicss/maic-marked",
   "bugs": {
@@ -32,8 +29,6 @@
     "showdown": "*"
   },
   "scripts": {
-    "test": "node test",
-    "bench": "node test --bench"
   },
   "dependencies": {
     "highlight.js": "^9.9.0"

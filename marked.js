@@ -198,16 +198,6 @@ class Lexer {
         }
       }
 
-      // abstract
-      if (cap = this.rules.abstract.exec(src)) {
-        src = src.replace(cap[0], '')
-        this.tokens.push({
-          type: 'abstract',
-          text: cap[0].replace(/<abstract>/g, '')
-        })
-        continue
-      }
-
       // toc
       if (cap = this.rules.toc.exec(src)) {
         src = src.replace(block.toc, '')
@@ -509,6 +499,16 @@ class Lexer {
         this.tokens.push({
           type: 'text',
           text: cap[0]
+        })
+        continue
+      }
+
+      // abstract
+      if (cap = this.rules.abstract.exec(src)) {
+        src = src.replace(cap[0], '')
+        this.tokens.push({
+          type: 'abstract',
+          text: cap[0].replace(/<abstract>/g, '')
         })
         continue
       }
