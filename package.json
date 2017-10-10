@@ -2,7 +2,7 @@
   "name": "maic-marked",
   "description": "A markdown parser built for speed",
   "author": "Christopher Jeffrey",
-  "version": "0.3.23",
+  "version": "0.3.24",
   "main": "marked.js",
   "repository": "git://github.com/maicss/maic-marked.git",
   "homepage": "https://github.com/maicss/maic-marked",

@@ -158,7 +158,6 @@ class Lexer {
 
   }
 
-  // static rules = block;
   static lex (src, marked, options) {
     let lexer = new Lexer(marked, options)
     return lexer.lex(src)
@@ -241,6 +240,16 @@ class Lexer {
 
         continue
 
+      }
+
+      // abstract
+      if (cap = this.rules.abstract.exec(src)) {
+        src = src.replace(cap[0], '')
+        this.tokens.push({
+          type: 'abstract',
+          text: cap[0].replace(/<abstract>/g, '')
+        })
+        continue
       }
 
       // code
@@ -499,16 +508,6 @@ class Lexer {
         this.tokens.push({
           type: 'text',
           text: cap[0]
-        })
-        continue
-      }
-
-      // abstract
-      if (cap = this.rules.abstract.exec(src)) {
-        src = src.replace(cap[0], '')
-        this.tokens.push({
-          type: 'abstract',
-          text: cap[0].replace(/<abstract>/g, '')
         })
         continue
       }
@@ -819,7 +818,7 @@ class Renderer {
   code (code, lang, escaped) {
     if (this.options.highlight) {
       let out = this.options.highlight(code, lang)
-      if (out != null && out !== code) {
+      if (out && out !== code) {
         escaped = true
         code = out
       }
@@ -834,7 +833,6 @@ class Renderer {
   };
 
   abstract (text) {
-    // console.log(text)
     return `<blockquote>${text}</blockquote>`
   }
 
@@ -976,7 +974,7 @@ class Parser {
           }
           break
         case 'abstract':
-          this.res.abstract = this.token.text.trim()
+          this.res.abstract = this.inline.output(this.token.text.trim())
           break
         case 'date':
           this.res.date = this.token.text
@@ -1166,66 +1164,13 @@ class Marked {
     }
   }
 
-  exec (src, callback) {
+  exec (src) {
     if (typeof src !== 'string') {
       throw TypeError('Source MUST be String, but get ', typeof src)
     }
-    if (callback && typeof callback === 'function') {
-
-      let tokens
-        , pending
-        , i = 0
-
-      try {
-        tokens = Lexer.lex(this, src, this.defaults)
-      } catch (e) {
-        return callback(e)
-      }
-
-      pending = tokens.length
-
-      let done = function (err) {
-        if (err) {
-          return callback(err)
-        }
-
-        let out
-
-        try {
-          out = Parser.parse(tokens, this, new Renderer(this), this.defaults)
-        } catch (e) {
-          err = e
-        }
-
-        this.res.html = out
-        return err
-          ? callback(err)
-          : callback(null, this.res)
-      }
-
-      if (!pending) return done()
-
-      for (; i < tokens.length; i++) {
-        (function (token) {
-          if (token.type !== 'code') {
-            return --pending || done()
-          }
-          return this.defaults.highlight(token.text, token.lang, function (err, code) {
-            if (err) return done(err)
-            if (code === null || code === token.text) {
-              return --pending || done()
-            }
-            token.text = code
-            token.escaped = true
-            --pending || done()
-          })
-        })(tokens[i])
-      }
-
-      return
-    }
     try {
       this.res.html = Parser.parse(Lexer.lex(src, this), this, new Renderer(this))
+      // this.res.html = Lexer.lex(Parser.parse(src, this, new Renderer(this)), this)
       return this.res
     } catch (e) {
       e.message += '\nPlease report this to https://github.com/maicss/marked.\n\n'
